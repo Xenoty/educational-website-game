@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="269" height="108" viewBox="0 0 269 108">
+  <g id="matching_icon" transform="translate(-801 -441)">
+    <g id="Group_8" data-name="Group 8" transform="translate(801 441)">
+      <g id="Group_1" data-name="Group 1" transform="translate(0)">
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="95" height="25" transform="translate(0)" fill="#569fff"/>
+        <rect id="Rectangle_4" data-name="Rectangle 4" width="95" height="26" transform="translate(0 41)" fill="#569fff"/>
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="95" height="25" transform="translate(0 83)" fill="#569fff"/>
+      </g>
+      <g id="Group_2" data-name="Group 2" transform="translate(174)">
+        <rect id="Rectangle_6" data-name="Rectangle 6" width="95" height="25" transform="translate(0)" fill="#ff9f56"/>
+        <rect id="Rectangle_7" data-name="Rectangle 7" width="95" height="26" transform="translate(0 41)" fill="#ff9f56"/>
+        <rect id="Rectangle_8" data-name="Rectangle 8" width="95" height="25" transform="translate(0 83)" fill="#ff9f56"/>
+      </g>
+      <path id="Path_1" data-name="Path 1" d="M905.711,457.666l59.1,72.842" transform="translate(-801 -441)" fill="none" stroke="#707070" stroke-width="3"/>
+    </g>
+    <path id="Path_2" data-name="Path 2" d="M908.46,494.774h59.1" fill="none" stroke="#707070" stroke-width="3"/>
+  </g>
+</svg>

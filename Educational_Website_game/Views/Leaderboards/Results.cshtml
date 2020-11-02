@@ -1,0 +1,102 @@
+﻿@model  IEnumerable<LibraryDeweyApp.ViewModels.ResultsVM>
+@{
+    ViewBag.Title = "Results";
+    var count = 0;
+    var ldrbrd = ViewBag.ldrName;
+}
+
+<h2>@ViewBag.ldrName Leaderboard</h2>
+
+@if (TempData["Result"] != null)
+{
+    <div class="alert-success">
+        <strong>@TempData["Result"].ToString()</strong>
+    </div>
+}
+
+@Html.ActionLink("View All LeaderBoards", "Index", "Leaderboards", null, new { @class = "btn btn-sucess" })
+
+@*@Html.ActionLink("Play Game!", "Index", "ReplacingBooks", null, new { @class = "btn btn-sucess" })*@
+@if (ldrbrd.Contains("Replacing"))
+{
+    @Html.ActionLink("Play Game!", "Index", "ReplacingBooks", null, new { @class = "btn btn-sucess" })
+}
+else if (ldrbrd.Contains("Identifying"))
+{
+    @Html.ActionLink("Play Game!", "Index", "IdentifyAreas", null, new { @class = "btn btn-sucess" })
+}
+else
+{
+    @Html.ActionLink("Play Game!", "Index", "FindingCallNumbers", null, new { @class = "btn btn-sucess" })
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Clear Leaderboard", "Clear", "Leaderboards", new { id = ViewBag.Id }, new { @class = "btn btn-sucess" })
+}
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            Rank
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeCompleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCompleted)
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        count++;
+        if (count == 1)
+        {
+            @:<tr style="background-color: gold;">
+            }
+            else if (count == 2)
+            {
+                @:<tr style="background-color: silver;">
+            }
+            else if (count == 3)
+            {
+                @:<tr style="background-color: #d48536cc;">
+            }
+            else
+            {
+                @:<tr>
+            }
+            <td>
+                @count
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCompleted)
+            </td>
+        @:</tr>
+    }
+
+</table>
+

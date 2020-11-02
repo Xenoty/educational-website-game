@@ -1,0 +1,237 @@
+﻿@model LibraryDeweyApp.ViewModels.FindingCallNumbersViewModel
+@{
+    ViewBag.Title = "Finding Call Numbers Result";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<style>
+    .questionsButton{
+        float:right;
+    }
+    .questionColumn{
+        cursor:pointer;
+    }
+    .questionColumn:hover {
+        box-shadow: 0px 8px 25px 8px rgba(0,0,0,0.2);
+    }
+
+    .correctAnswer {
+        background-color: #9fff9f;
+    }
+</style>
+
+
+@if (TempData["SaveResult"] != null)
+{
+    <div class="alert-success">
+        <strong>@TempData["SaveResult"].ToString()</strong>
+    </div>
+}
+
+@if (Model != null && Model.questionsList != null)
+{
+    <div class="col-md-4">
+        <h3>Your score: @Model.Result/@Model.TotalMarks</h3>
+        <p> @Model.Percentage%</p>
+    </div>
+    <div class="col-md-4">
+        <h3>
+            Time: @Model.TimeCompleted
+        </h3>
+        <p>Date: @DateTime.Now</p>
+    </div>
+
+
+
+    using (Html.BeginForm("Save", "FindingCallNumbers", FormMethod.Post))
+    {
+        //Html.AntiForgeryToken();
+        <div class="col-md-4">
+            <h3>
+                <a class="btn btn-primary" href="~/FindingCallNumbers/">Try Again »</a>
+
+                @Html.HiddenFor(a => a.TimeCompleted)
+                @Html.HiddenFor(a => a.Result)
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Model.SavedResult != true)
+                    {
+                        <input type="submit" class="btn btn-success" value="Save" />
+                    }
+                    else
+                    {
+                        @Html.ActionLink("View Leaderboard", "Results", "Leaderboards", new { id = 3 }, new { @class = "btn btn-success" })
+                    }
+                }
+                else
+                {
+                    @Html.ActionLink("Log in to Save Next Result", "Login", "Account", new { ReturnUrl = "~/FindingCallNumbers/" }, new { @class = "btn btn-success" })
+                }
+            </h3>
+        </div>
+
+
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="3">
+                    <b>Third Level Question:</b> @Model.question.ToString()
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Questions
+                </th>
+                <th>
+                    Correct Answers
+                </th>
+                <th>
+                    Your answers (@Model.Result/@Model.TotalMarks)
+                </th>
+            </tr>
+            <tr>
+                <td class="questionColumn">
+                    <p onclick="DisplayQuestions('topLevel');">Top Level Questions <span class="questionsButton">&#8595;(show)</span></p>
+                    <div id="topLevel" style="display:none;">
+                        @foreach (var item in Model.TopLevelQ)
+                        {
+                        <ul>
+                            <l @if (item == Model.topLevelAns) { @: class="correctAnswer"
+                               }>@item.ToString()</l>
+                        </ul>                           
+                        }
+                    </div>
+                </td>
+                <td class="correctAnswer">
+                    @Model.topLevelAns.ToString()
+                </td>
+                @if (Model.topLevelUserAns == Model.topLevelAns)
+                {
+                    <td class="correctAnswer">
+                        <p>@Model.topLevelUserAns</p>
+                    </td>
+                }
+                else
+                {
+                    <td style="background-color: #ff9f9f;">
+                        @if (!String.IsNullOrEmpty(Model.topLevelUserAns))
+                        {
+                            <p>@Model.topLevelUserAns</p>
+                        }
+                        else
+                        {
+                            <p>No Answer</p>
+                        }
+                    </td>
+                }
+
+            </tr>
+            <tr>
+                <td class="questionColumn">
+                    <p onclick="DisplayQuestions('secondLevel');">Second Level Questions <span class="questionsButton">&#8595;(show)</span></p>
+                    <div id="secondLevel" style="display:none;">
+                        @foreach (var item in Model.SecondLevelQ)
+                        {
+                            <ul>
+                                <l @if (item == Model.secondLevelAns) { @: class="correctAnswer"
+                                   }>@item.ToString()</l>
+                            </ul>
+                        }
+                    </div>
+                </td>
+                <td class="correctAnswer">
+                    @Model.secondLevelAns.ToString()
+                </td>
+                @if (Model.secondLevelUserAns == Model.secondLevelAns)
+                {
+                    <td class="correctAnswer">
+                        <p>@Model.secondLevelUserAns</p>
+                    </td>
+                }
+                else
+                {
+                    <td style="background-color: #ff9f9f;">
+                        @if (!String.IsNullOrEmpty(Model.secondLevelUserAns))
+                        {
+                            <p>@Model.secondLevelUserAns</p>
+                        }
+                        else
+                        {
+                            <p>No Answer</p>
+                        }
+                    </td>
+                }
+
+            </tr>
+            <tr>
+                <td class="questionColumn">
+                    <p onclick="DisplayQuestions('thirdLevel');">Third Level Questions <span class="questionsButton">&#8595;(show)</span></p>
+                    <div id="thirdLevel" style="display:none;">
+                        @foreach (var item in Model.ThirdLevelQ)
+                        {
+                            <ul>
+                                <l @if (item == Model.thirdLevelAns) { @: class="correctAnswer"
+                                   }>@item.ToString()</l>
+                            </ul>
+                        }
+                    </div>
+                </td>
+                <td class="correctAnswer">
+                    @Model.thirdLevelAns.ToString()
+                </td>
+                @if (Model.thirdLevelUserAns == Model.thirdLevelAns)
+                {
+                    <td class="correctAnswer">
+                        <p>@Model.thirdLevelUserAns</p>
+                    </td>
+                }
+                else
+                {
+                    <td style="background-color: #ff9f9f;">
+                        @if (!String.IsNullOrEmpty(Model.thirdLevelUserAns))
+                        {
+                            <p>@Model.thirdLevelUserAns</p>
+                        }
+                        else
+                        {
+                            <p>No Answer</p>
+                        }
+                    </td>
+                }
+
+            </tr>
+        </table>
+    }
+
+}
+else
+{
+    <div class="col-md-12">
+        <p>You have no results, please try again</p>
+        <div class="row">
+            @Html.ActionLink("Take test >> ", "Index","FindingCallNumbers", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("View Leadorboards", "Results", "Leaderboards", new { id = 2 }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        function DisplayQuestions(id) {
+            console.log("id : " + id);
+            var elm = document.getElementById(id).style.display
+            //var classAtr = "." + className;
+            if (elm == "none") {
+                console.log("display == none");
+                document.getElementById(id).style.display = "block";
+            } else {
+                console.log("display == block");
+                document.getElementById(id).style.display = "none";
+            }
+        }
+    </script>
+} 

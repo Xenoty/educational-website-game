@@ -1,0 +1,208 @@
+﻿@model LibraryDeweyApp.Models.MatchColumns
+@{
+    ViewBag.Title = "Identifying Areas Result";
+    var userAnswers = "";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData["SaveResult"] != null)
+{
+    <div class="alert-success">
+        <strong>@TempData["SaveResult"].ToString()</strong>
+    </div>
+}
+
+@if (Model != null && Model.questions != null)
+{
+    <div class="col-md-4">
+        <h3>Your score: @Model.Result/@ViewBag.TotalMarks</h3>
+        <p> @ViewBag.Percent%</p>
+    </div>
+    <div class="col-md-4">
+        <h3>
+            Time: @Model.TimeCompleted
+        </h3>
+        <p>Date: @DateTime.Now</p>
+    </div>
+
+
+
+    using (Html.BeginForm("Save", "IdentifyAreasResult", FormMethod.Post))
+    {
+        //Html.AntiForgeryToken();
+        <div class="col-md-4">
+            <h3>
+                <a class="btn btn-primary" href="~/IdentifyAreas/">Try Again »</a>
+
+                @Html.HiddenFor(a => a.TimeCompleted)
+                @Html.HiddenFor(a => a.Result)
+
+                @*<input type="hidden" value="@ViewBag.Result" name="userResult" />*@
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Model.SavedResult != true)
+                    {
+                        <input type="submit" class="btn btn-success" value="Save" />
+                    }
+                    else
+                    {
+                        @Html.ActionLink("View Leaderboard", "Results", "Leaderboards", new { id = 2 }, new { @class = "btn btn-success" })
+                    }
+                }
+                else
+                {
+                    @Html.ActionLink("Log in to Save Next Result", "Login", "Account", new { ReturnUrl = "~/IdentifyAreas/" }, new { @class = "btn btn-success" })
+                }
+            </h3>
+        </div>
+
+
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Questions
+                </th>
+                @*<th>
+                    Answers
+                </th>*@
+                <th>
+                    Correct Answers
+                </th>
+                <th>
+                    Your Answers (@Model.Result/@ViewBag.TotalMarks)
+                    @for (int i = 0; i < Model.answers.Count; i++)
+                    {
+
+                        //var key = Model.answers.ElementAt(i).Key.ToString();
+                        //if (!string.IsNullOrEmpty(userAnswers))
+                        //{
+
+                        //}
+                        //else
+                        //{
+                        //    userAnswers = Model.answers.ElementAt(i).Key.ToString();
+                        //}
+                    }
+
+                </th>
+            </tr>
+            @for (int i = 0; i < Model.questions.Count; i++)
+            {
+
+                for (int j = i; j < Model.sortedQuestions.Count;)
+                {
+                    for (int k = i; k < Model.answers.Count;)
+                    {
+                        var qKey = Model.questions.ElementAt(i).Key.ToString().PadLeft(3, '0');
+                        var qValue = Model.questions.ElementAt(i).Value;
+                        var sortKey = Model.sortedQuestions.ElementAt(i).Key.ToString().PadLeft(3, '0');
+                        var sortValue = Model.sortedQuestions.ElementAt(i).Value;
+                        var userKey = Model.answers.ElementAt(i).Key.ToString().PadLeft(3, '0');
+                        var userValue = Model.answers.ElementAt(i).Value;
+
+                        var questions = "";
+                        var answers = "";
+                        var correctAnswers = "";
+                        var userAnsw = "";
+
+                        <tr>
+                             @if (i <= 4)
+                             {
+                                     //need to check if callnumber = left
+                                     if (Model.isCallNumberOrder == true)
+                                     {
+
+                                          questions = qKey;
+                                          answers = qValue;
+                                          correctAnswers = sortValue;
+                                          userAnsw = userValue;
+                                     }
+                                     else
+                                     {
+
+                                          questions = qValue;
+                                          answers = qKey;
+                                          correctAnswers = sortKey;
+                                          userAnsw = userKey;
+                                     }
+                                    <td>
+                                        @*@Html.HiddenFor(x => x.RandomCallNumberList[i].ID)
+                                        @Html.HiddenFor(x => x.RandomCallNumberList[i].RandCallNumber)*@
+                                        <p>@questions</p>
+                                    </td>       
+                                    <!--<td>-->
+                                        @* original answers *@
+                                        <!--<p>@answers</p>
+                                    </td>-->  
+                                    <td style="background-color:#9fff9f;">
+                                        @*@Html.HiddenFor(x => x.SortedCallNumberList[i].ID)
+                                        @Html.HiddenFor(x => x.SortedCallNumberList[i].SortedCallNumber)*@
+                                        <p>@correctAnswers</p>
+                                    </td>
+                                    @*@Html.HiddenFor(x => x.UserCallNumberList[i].ID)
+                                    @Html.HiddenFor(x => x.UserCallNumberList[i].UserCallNumber)*@
+                                    if (userAnsw == correctAnswers)
+                                    {
+                                        <td style="background-color:#9fff9f;">
+                                            <p>@userAnsw</p>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="background-color: #ff9f9f;">
+                                            @if (!String.IsNullOrEmpty(userAnsw))
+                                            {
+                                                <p>@userAnsw</p>
+                                            }
+                                            else
+                                            {
+                                                <p>No Answer</p>
+                                            }
+
+                                        </td>
+                                    }
+                             }
+                           
+                        </tr>
+                        break;
+                    }
+                    break;
+                }
+
+            }
+        </table>
+    }
+
+
+    if (!string.IsNullOrEmpty(ViewBag.SaveResult))
+    {
+        <p>@ViewBag.SaveResult</p>
+    }
+}
+else
+{
+    <div class="col-md-12">
+        @if (!string.IsNullOrEmpty(ViewBag.AuthError))
+        {
+            <h4>You need to login to Save Results</h4>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.SaveResult))
+        {
+            <p>@ViewBag.SaveResult</p>
+        }
+        <p>You have no results, please try again</p>
+        <div class="row">
+            @using (Html.BeginForm("Index", "IdentifyAreas", FormMethod.Get))
+            {
+                @*@Html.AntiForgeryToken()*@
+                <input type="hidden" value="start" name="x" />
+                <input type="submit" value="Take Test »" class="btn btn-success" />
+            }
+            @*@Html.ActionLink("Take Test »", "Index", "ReplacingBooks", null, new { @class = "btn btn-success" })*@
+            @Html.ActionLink("View Leadorboards", "Results", "Leaderboards", new { id = 2 }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+

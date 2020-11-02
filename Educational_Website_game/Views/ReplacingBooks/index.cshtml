@@ -1,0 +1,240 @@
+﻿@model LibraryDeweyApp.Global.CallNumbers
+@{
+    ViewBag.Title = "Replacing Books Game";
+}
+
+<style>
+    .jumbotron p {
+        font-size: 17px;
+    }
+
+    #sortable tr:hover {
+        background-color: #0094ff;
+        color: #fff;
+    }
+</style>
+
+@{var randList = "";
+    var modelDis = false;
+    if (Model == null)
+    {
+        modelDis = true;
+    }
+}
+
+
+
+<h2 style="text-align:center">Replacing Books with Dewey Decimal System!</h2>
+<br />
+@if (modelDis != true)
+{
+    <div class="row" style="width: fit-content; float: right; right: 0; margin: 0 0 2vh 0;">
+        @Html.ActionLink("Help", "Index", "ReplacingBooks", null, new { @class = "btn btn-default" })
+        <btn onclick="refresh()" class="btn btn-danger">Restart</btn> 
+    </div>
+  
+}
+<div class="row" style="clear:both;">
+    @if (modelDis == true)
+    {
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><b>1.</b> The <a href="https://guides.library.appstate.edu/dewey" target="_blank">Dewey Decimal System</a> is used worldwide in libraries, this will test you in reorganizng the Call Numbers from Smallest to Largest.</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>2.</b> A Random List of <a href="https://www.library.northwestern.edu/find-borrow-request/catalogs-search-tools/understanding-call-numbers/dewey.html#:~:text=Reading%20the%20number&text=The%20first%20number%20of%20a,a%20specific%20divisions%20and%20sections." target="_blank">Call Numbers</a> will be generated in the "Random Call Number Generation" Table below</p>
+                </div>
+
+                <div class="col-md-12">
+                    <p><b>3.</b> Drag & Drop the Call Numbers in the correct order and click "Submit" to finish</p>
+                </div>
+
+                <div class="col-md-12">
+                    
+                    @*<p>Example: 305.621 F547<b style="color:red">,</b> 306.55 A32<b style="color:red">,</b> 306.55 B32</p>*@
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <p><b>4.</b> You need an Account to Save your Results @Html.ActionLink("Register", "Register", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null) or @Html.ActionLink("Log in", "Login", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null)</p>
+                    }
+                    @using (Html.BeginForm("Index", "ReplacingBooks", FormMethod.Post, new { @style = "width: fit-content;margin: auto;" }))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <input type="hidden" value="start" name="x" />
+                        <input type="submit" value="Start Now!" class="btn btn-primary" style="font-size:18px;" />
+                    }
+
+                    @*@Html.ActionLink("Start Now!", "Index", "ReplacingBooks", new { x = "start"}, FormMethod.Post)*@
+
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+
+    }
+
+
+
+
+    @using (Html.BeginRouteForm("MyCustomRoute", new { controller = "ReplacingBooksResult", action = "Index" }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6" style="float:none;margin:auto;">
+                @*<div class="container">*@
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="2" style="text-align:center">
+                                Random Call Number Generation
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Number</th>
+                            <th>
+                                Random Call Numbers
+                            </th>
+                        </tr>
+                        <tbody id="sortable" style="cursor:pointer">
+                            @if (modelDis != true)
+                            {
+                                for (var i = 0; i < Model.RandomCallNumberList.Count; i++)
+                                {
+                                    var id = Model.RandomCallNumberList[i].ID;
+                                    var randCallNum = Model.RandomCallNumberList[i].RandCallNumber;
+                                    <tr>
+                                          @Html.HiddenFor(x=> x.RandomCallNumberList[i].ID)
+                                          @Html.HiddenFor(x => x.RandomCallNumberList[i].RandCallNumber)
+                                        <td>@id
+                                        </td>
+                                        <td class="taskSingleInline" id="task@(randCallNum)" data-taskid="@(randCallNum)">@randCallNum
+                                      </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                @*</div>*@
+
+            </div>
+        </div>
+        <div class="row" style="margin:auto;width:fit-content;">
+            <div class="col-md-4" style="width:fit-content;">
+
+                <span style="font-size:25px;"> Time : </span> <span id="timer" style="font-size:25px;">00:00:00.000</span>
+
+                @*<textarea cols="50" rows="5" id="answers" name="answers"
+                    @if (modelDis == true) { @: disabled
+                    } style="font-size:18px;" maxlength="200" placeholder="Enter your answers here..."></textarea>*@
+
+                @*<input type="hidden" value="@randList" name="randList" />*@
+
+                @*<input type="hidden" value="empty" name="time" id="time" />*@
+
+                <input type="hidden" value="" name="answers" id="answers" />
+
+                @Html.HiddenFor(m => m.TimeCompleted, new { id = "timehidden" })
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit Answer" class="btn btn-success" id="test" onclick="stop();" @if (modelDis == true) { @: disabled
+                               } />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    }
+
+
+
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+        var timeBegan = null;
+        var started = null;
+
+        $(document).ready(function () {
+            //check to see if post was triggered
+            if (@ViewBag.PostBack != false) {
+                //start stopwatch
+                start();
+            }
+        });
+
+        function start() {
+            if (timeBegan === null) {
+                timeBegan = new Date();
+                started = setInterval(clockRunning, 10);
+            }
+        }
+
+        function stop() {
+            timeStopped = new Date();
+            clearInterval(started);
+        }
+
+        function clockRunning() {
+
+            var currentTime = new Date()
+                , timeElapsed = new Date(currentTime - timeBegan)
+                , hour = timeElapsed.getUTCHours()
+                , min = timeElapsed.getUTCMinutes()
+                , sec = timeElapsed.getUTCSeconds()
+                , ms = timeElapsed.getUTCMilliseconds();
+
+            var timeCal = (hour > 9 ? hour : "0" + hour) + ":" +
+                (min > 9 ? min : "0" + min) + ":" +
+                (sec > 9 ? sec : "0" + sec) + "." +
+                (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+
+            document.getElementById("timer").innerHTML = timeCal;
+            $("#timehidden").val(timeCal);
+        };
+
+        function refresh() {
+            window.location.reload();
+        }
+
+    $(document).ready(function () {
+        $("#sortable").sortable({
+            update: function (event, ui) {
+                var itemIds = "";
+                $("#sortable").find(".taskSingleInline").each(function () {
+                    var itemId = $(this).attr("data-taskid");
+                    itemIds = itemIds + itemId + ",";
+                    
+                });
+                document.getElementById("answers").value = itemIds;
+                //console.log(document.getElementById("answers").value)
+
+                @*$.ajax({
+                    url: '@Url.Action("UpdateItem", "ReplacingBooksResult")',
+                    data: { itemIds: itemIds },
+                    type: 'POST',
+                    success: function (data) {
+
+                    },
+                    error: function (xhr, status, error) {
+
+                    }
+                })*@
+            }
+        });
+    });
+
+    </script>
+}
+
+
+
+

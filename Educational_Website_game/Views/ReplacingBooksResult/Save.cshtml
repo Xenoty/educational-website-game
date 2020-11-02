@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "save";
+}
+
+<h2>save</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Success))
+{
+    <p>@ViewBag.Success</p>
+    @*<a class="btn btn-default" href="~/ReplacingBooks/">Try Again »</a>*@
+}
+else
+{
+    <p>You don't have any results to save, or it was unssuccesful</p>
+}
+
+@Html.ActionLink("Try Again »", "Index", "ReplacingBooks", null, new { @class = "btn btn-success" })
+@Html.ActionLink("View Leadorboards", "Results", "Leaderboards", new { id = 1 }, new { @class = "btn btn-primary" })
+
+

@@ -1,0 +1,333 @@
+﻿@model LibraryDeweyApp.Models.MatchColumns
+
+@{
+    ViewBag.Title = "Macthing Columns";
+    var modelDis = false;
+    if (Model == null)
+    {
+        modelDis = true;
+    }
+}
+
+<style>
+    .jumbotron p {
+        font-size: 17px;
+    }
+
+    #sortable tr:hover {
+        background-color: #0094ff;
+        color: #fff;
+    }
+</style>
+
+<h2 style="text-align:center">Match the Columns!</h2>
+<br />
+@if (modelDis != true)
+{
+    <div class="row" style="width: fit-content; float: right; right: 0; margin: 0 0 2vh 0;">
+        @Html.ActionLink("Help", "Index", "IdentifyAreas", null, new { @class = "btn btn-default" })
+        <btn onclick="refresh()" class="btn btn-danger">Restart</btn>
+    </div>
+
+}
+
+<div class="row" style="clear:both;">
+
+    @if (modelDis == true)
+    {
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><b>1.</b> The <a href="https://guides.library.appstate.edu/dewey" target="_blank">Dewey Decimal System</a> is used worldwide in libraries, this will test you in Matching the correct columns.</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>2.</b>You will be required to match the following top-level aspects:<br />Descriptions => <a href="https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes" target="_blank">Decimal Class</a> or <br/><a href="https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes" target="_blank">Decimal Class</a> => Descriptions</p>
+                </div>
+
+                <div class="col-md-12">
+                    <p><b>3.</b> Drag & Drop the possible answers in the correct order following the question, and click "Submit" to finish</p>
+                </div>
+
+                <div class="col-md-12">
+
+                    @*<p>Example: 305.621 F547<b style="color:red">,</b> 306.55 A32<b style="color:red">,</b> 306.55 B32</p>*@
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <p><b>4.</b> You need an Account to Save your Results @Html.ActionLink("Register", "Register", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null) or @Html.ActionLink("Log in", "Login", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null)</p>
+                    }
+                    @using (Html.BeginForm("Index", "IdentifyAreas", FormMethod.Post, new { @style = "width: fit-content;margin: auto;" }))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <input type="hidden" value="start" name="x" />
+                        <input type="submit" value="Start Now!" class="btn btn-primary" style="font-size:18px;" />
+                    }
+
+                    @*@Html.ActionLink("Start Now!", "Index", "ReplacingBooks", new { x = "start"}, FormMethod.Post)*@
+
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+
+    }
+
+
+    @using (Html.BeginRouteForm("IdentifyCustomRoute", new { controller = "IdentifyAreasResult", action = "Index" }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        var setAnswers = "";
+        var setQuestions = "";
+
+        <div class="container">
+            <div class="col-md-6">
+                <table class="table table-bordered" style="border: none;">
+                    <tr>
+                        <th colspan="2" style="text-align:center">Questions</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>@ViewBag.ColumnOrder</th>
+                    </tr>
+                    <tbody>
+                        @if (modelDis != true)
+                        {
+                            for (int i = 0; i < Model.questions.Count; i++)
+                            {
+                                for (int j = i; j < Model.RandomNoList.Count;)
+                                {
+                                    var id = i + 1;
+                                    var leftColumn = "";
+                                    var rightColumn = "";
+
+                                    if (Model.isCallNumberOrder == true)
+                                    {
+                                        @*@Html.HiddenFor(x => x.questions.ElementAt[i].Key)*@
+                                        Html.Hidden(id.ToString(), Model.questions.ElementAt(i).Key);
+                                        leftColumn = Model.questions.ElementAt(i).Key.ToString().PadLeft(3, '0');
+                                    }
+                                    else
+                                    {
+                                        Html.Hidden(id.ToString(), Model.questions.ElementAt(i).Value);
+                                        leftColumn = Model.questions.ElementAt(i).Value;
+                                    }
+                                    <tr>
+
+                                        @if (i < 4)
+                                        {
+                                            <td style="width:fit-content">
+                                                @id
+                                            </td>
+                                            <td>
+                                                @leftColumn
+                                            </td>
+
+                                            if (!string.IsNullOrEmpty(setQuestions))
+                                            {
+                                                setQuestions = setQuestions + "," + leftColumn;
+                                            }
+                                            else
+                                            {
+                                                setQuestions = leftColumn;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td style="border:none;">
+                                            </td>
+                                        }
+                                    </tr>
+                                    break;
+                                }
+                            }
+                        }                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-bordered" style="border: none;">
+                    <tr>
+                        <th colspan="2" style="text-align:center">Possible Answers</th>
+                    </tr>
+                    <tr>
+                        <th style="width:fit-content !important">
+
+                        </th>
+                        <th>
+                            @ViewBag.OtherColumn
+                        </th>
+                    </tr>
+                    <tbody id="sortable" style="cursor:pointer">
+                        @if (modelDis != true)
+                        {
+                            for (int i = 0; i < Model.questions.Count; i++)
+                            {
+                                for (int j = i; j < Model.RandomNoList.Count;)
+                                {
+                                    var id = i + 1;
+                                    var rightColumn = "";
+                                    var randIndex = Model.RandomNoList[j];
+
+                                    if (Model.isCallNumberOrder == true)
+                                    {
+                                        //Html.Hidden(id.ToString(), Model.questions.ElementAt(i).Value);
+                                        rightColumn = Model.questions.ElementAt(randIndex).Value;
+                                    }
+                                    else
+                                    {
+                                        rightColumn = Model.questions.ElementAt(randIndex).Key.ToString().PadLeft(3, '0');
+                                    }
+
+
+                                    @*<input type="hidden" name="@("Model.questions[" +  Model.questions.ElementAt(i) + "].Key")" value="@Model.questions.ElementAt(i).Key" />*@
+
+
+                                    if (!string.IsNullOrEmpty(setAnswers))
+                                    {
+                                        setAnswers = setAnswers + "," + rightColumn;
+                                    }
+                                    else
+                                    {
+                                        setAnswers = rightColumn;
+                                    }
+
+
+
+
+
+                                    <tr>
+                                        <td class="index" style="width:fit-content !important">
+                                            @id
+                                        </td>
+                                        <td class="taskSingleInline" id="task@(rightColumn)" data-taskid="@(rightColumn)">
+                                            @rightColumn
+                                        </td>
+                                    </tr>
+                                    break;
+                                }
+                            }
+
+                            @* Testing *@
+                            @*@{ int kvInd = 0; }
+
+                @foreach (KeyValuePair<int, string> kv in Model.questions)
+                {
+                    <input type="hidden" name="@("Model.SelectedResults[" + kvInd + "].Key")" value="@kv.Key" />
+
+                    for (int isr = 0; isr < kv.Value.Count(); isr++)
+                    {
+                        <input type="hidden" name="@("Model.SelectedResults[" + kvInd + "].Value[" + isr + "]")" />
+                    }
+                    kvInd++;
+
+                }*@
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div class="row" style="margin:auto;width:fit-content;">
+            <div class="col-md-4" style="width:fit-content">
+                <span style="font-size:25px;"> Time : </span> <span id="timer" style="font-size:25px;">00:00:00.000</span>
+
+                <input type="hidden" value="" name="answers" id="answers" />
+                @Html.Hidden("orgAnswers", setAnswers)
+                @Html.Hidden("questions", setQuestions)
+                @Html.HiddenFor(m => m.TimeCompleted, new { id = "timehidden" })
+                @Html.HiddenFor(m => m.isCallNumberOrder, new { id = "columnOrder" })
+                @Html.HiddenFor(m => m.TotalResult, new { id = "total" })
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit Answer" class="btn btn-success" id="test" onclick="stop();" @if (modelDis == true) { @: disabled
+                               }/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+        var timeBegan = null;
+        var started = null;
+
+           $(document).ready(function () {
+            //check to see if post was triggered
+            if (@ViewBag.PostBack != false) {
+                //start stopwatch
+                start();
+            }
+        });
+
+        function start() {
+            if (timeBegan === null) {
+                timeBegan = new Date();
+                started = setInterval(clockRunning, 10);
+            }
+        }
+
+        function stop() {
+            timeStopped = new Date();
+            clearInterval(started);
+        }
+
+        function clockRunning() {
+
+            var currentTime = new Date()
+                , timeElapsed = new Date(currentTime - timeBegan)
+                , hour = timeElapsed.getUTCHours()
+                , min = timeElapsed.getUTCMinutes()
+                , sec = timeElapsed.getUTCSeconds()
+                , ms = timeElapsed.getUTCMilliseconds();
+
+            var timeCal = (hour > 9 ? hour : "0" + hour) + ":" +
+                (min > 9 ? min : "0" + min) + ":" +
+                (sec > 9 ? sec : "0" + sec) + "." +
+                (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+
+            document.getElementById("timer").innerHTML = timeCal;
+            $("#timehidden").val(timeCal);
+        };
+
+        function refresh() {
+            window.location.reload();
+        }
+
+        $(document).ready(function () {
+            //start();
+
+            $("#sortable").sortable({
+                update: function (event, ui) {
+                    var itemIds = "";
+                    $("#sortable").find(".taskSingleInline").each(function () {
+                        var itemId = $(this).attr("data-taskid");
+                        itemIds = itemIds + itemId + ",";
+                    });
+                    //assign user values to hidden field
+                    document.getElementById("answers").value = itemIds;
+                },
+                stop: function (event, tr) {
+                    $("#sortable tr").each(function (index, element) {
+                        index = index + 1;
+                        var val = $(element).children(".index").first();
+                        val.text(index);
+                    });
+                }
+            });
+        });
+    </script>
+}

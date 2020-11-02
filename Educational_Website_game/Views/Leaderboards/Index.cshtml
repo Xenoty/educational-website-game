@@ -1,0 +1,135 @@
+﻿@model IEnumerable<LibraryDeweyApp.Models.Leaderboards>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Leaderboards</h2>
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+}
+<style>
+    .leaderboards-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+
+     
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 1rem 20px;
+        max-width: 26rem;
+        border: 1px solid #abdbff;
+        cursor: pointer;
+        position: relative;
+        box-sizing: content-box;
+    }
+
+    .card:hover {
+        box-shadow: 0px 4px 10px 1px rgba(0,0,0,.2);
+        border: unset;
+    }
+
+    .card .title{
+        margin-bottom:10px;
+        font-size:17px;
+        text-align:center;
+    }
+
+    .card img {
+        width: 100%;
+        max-width: 10rem;
+        display: block;
+        margin: 0 auto 1rem auto;
+    }
+
+    .card a {
+        text-decoration: none;
+        background-color: #abdbff;
+        color: #000000;
+        border-radius: 15px;
+        padding: 5px 20px;
+        text-align: center;
+        display: block;
+        font-size: 15px;
+    }
+
+    .card .answer {
+        position: absolute;
+        top: 8px;
+        right: 19px;
+    }
+
+    .card .edit {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+    }
+
+    .card .edit a {
+        display: block;
+        background-color: none;
+        border: 1px solid #abdbff;
+        border-radius: 8px;
+        padding: 5px 16px;
+        margin-left: 5px;
+    }
+</style>
+
+<div class="leaderboards-wrapper">
+    @foreach (var item in Model)
+    {
+        <div class="card" @if (!User.IsInRole("Admin"))
+        {
+             @:onclick="Leaderboard(@item.LeaderboardsID);"
+        }
+        >
+            <span class="answer">(@item.TotalMarks)</span>
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="edit">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LeaderboardsID })
+                    @Html.ActionLink("Details", "Details", new { id = item.LeaderboardsID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LeaderboardsID })
+                </div>
+            }
+            <div class="title">
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            @if (item.Name.Contains("Replacing"))
+            {
+                <img src="~/Images/switch.svg" alt="ReplacingBooks" />
+            }
+            else if (item.Name.Contains("Identifying"))
+            {
+                <img src="~/Images/book.svg" alt="IdentifyingAreas" />
+            }
+            else
+            {
+                <img src="~/Images/search (1).svg" alt="FindingCallNumbers" />
+            }
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+               @Html.ActionLink("View Leaderboard", "Results", new { id = item.LeaderboardsID })
+            }
+        </div>
+    }
+
+</div>
+
+<script type="text/javascript">
+    function Leaderboard(id) {
+        console.log("id = " + id);
+        window.location.pathname = '/Leaderboards/Results/' + id;
+    }
+</script>

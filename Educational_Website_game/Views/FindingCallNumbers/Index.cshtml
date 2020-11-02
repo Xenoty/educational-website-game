@@ -1,0 +1,164 @@
+﻿@model LibraryDeweyApp.ViewModels.FindingCallNumbersViewModel
+
+@{
+    ViewBag.Title = "Finding Call Numbers";
+}
+
+<style>
+    .questions {
+        cursor: pointer;
+    }
+</style>
+
+<h2 style="text-align:center">Finding Call Numbers</h2>
+<br />
+<div class="row" style="width: fit-content; float: right; right: 0; margin: 0 0 2vh 0;">
+    @Html.ActionLink("Help", "HowTo", "FindingCallNumbers", null, new { @class = "btn btn-default" })
+    <btn onclick="refresh()" class="btn btn-danger">Restart</btn>
+</div>
+<div class="row" style="clear:both;">
+    @using (Html.BeginForm("Index", "FindingCallNumbers", FormMethod.Post, new { onsubmit = "return isValidForm()", id = "submitAnswer" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6" style="float:none;margin:auto;">
+                <span style="font-size:25px;"> Time : </span> <span id="timer" style="font-size:25px;">00:00:00.000</span>
+                <table class="table table-bordered">
+                    <tr style="background-color:#abdbff">
+                        <td colspan="2">
+                            <span style="float:left;font-weight:bold">Question : </span> <b style="text-align:center; margin-left:10px;">@Model.question</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p>
+                                Which
+                                @if (Model.currentLevel == 1)
+                                {
+                                    <b>Top Level</b>
+                                }
+                                else if (Model.currentLevel == 2)
+                                {
+                                    <b>Second Level</b>
+                                }
+                                else
+                                {
+                                    <b>Third Level</b>
+                                }
+                                Call number does the above <b>Third Level</b> description belong too?
+                            </p>
+                        </td>
+                    </tr>
+                    @for (int i = 0; i < Model.questionsList.Count; i++)
+                    {
+                        var count = i + 1;
+                        <tr>
+                            <td>
+                                @count .
+                            </td>
+                            <td class="questions" id="@count" onclick="CurrentAnswer(@count, '@Model.questionsList[i].ToString()')">
+                                @Model.questionsList[i].ToString()
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                            @Html.HiddenFor(m => m.TimeRunning, new { id = "timehidden" })
+                            <input type="hidden" name="userAnswer" id="answer" />
+                            <span id="error" style="color:red;display:block"></span>
+
+                            <input type="submit" value="Next" class="btn btn-success" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script type="text/javascript">
+        var timeBegan = null;
+        var started = null;
+
+        $(document).ready(function () {
+            start();
+        });
+
+        function start() {
+            if (timeBegan === null || timeBegan == '00:00:00') {
+                timeBegan = new Date();
+            }
+            started = setInterval(clockRunning, 10);
+        }
+
+        function stop() {
+            timeStopped = new Date();
+            clearInterval(started);
+        }
+
+        function clockRunning() {
+
+            var currentTime = new Date()
+                , timeElapsed = new Date(currentTime - timeBegan)
+                , hour = timeElapsed.getUTCHours()
+                , min = timeElapsed.getUTCMinutes()
+                , sec = timeElapsed.getUTCSeconds()
+                , ms = timeElapsed.getUTCMilliseconds();
+
+            var timeCal = (hour > 9 ? hour : "0" + hour) + ":" +
+                (min > 9 ? min : "0" + min) + ":" +
+                (sec > 9 ? sec : "0" + sec) + "." +
+                (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+
+            document.getElementById("timer").innerHTML = timeCal;
+            $("#timehidden").val(timeCal);
+        };
+
+        function refresh() {
+            window.location.reload();
+        }
+
+        function CurrentAnswer(id, value) {
+            //console.log("id: " +  id + " value: " + value);
+            //first clear all tr
+            var all = document.getElementsByClassName('questions');
+            for (var i = 0; i < all.length; i++) {
+                all[i].style.backgroundColor = '';
+            }
+            //first assign value to hidden field
+            document.getElementById("answer").value = value;
+
+            //then change the styling of the row
+            document.getElementById(id).style.backgroundColor = "#9fff9f";
+        }
+
+        function isValidForm() {
+            //get the selected answer
+            var val = document.getElementById("answer").value;
+            //console.log("Submit clicked");
+            if (val) {
+                //console.log("hidden value is not null");
+                //stop the timer
+                document.getElementById("error").innerHTML = "";
+                stop();
+                return true;
+            } else {
+                //console.log("hidden value is null");
+                //display error message
+                document.getElementById("error").innerHTML = "Please select an option.";
+                return false;
+            }
+        }
+
+    </script>
+
+}
+
+

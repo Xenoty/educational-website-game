@@ -1,0 +1,414 @@
+{
+    "Root" : [{
+        "subtree1" : [{
+            "name" : "000 Computer science, information & general works",
+            "children" : [{
+                "child1" : [{
+                    "name" : "000 Computer Science, knowledge & systems",
+                    "children" : [{
+                        "child1" : "001 Knowledge",
+                        "child2" : "002 The book",
+                        "child3" : "003 Systems",
+                        "child4" : "004 Data processing & computer science"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "010 Bibliographies",
+                    "children" : [{
+                        "child1" : "011 Bibliographies",
+                        "child2" : "012 Bibliographies of individuals",
+                        "child3" : "014 Bibliographies of anonymous & pseudonymous works",
+                        "child4" : "015 Bibliographies of works from specific places"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "020 Library & information sciences",
+                    "children" : [{
+                        "child1" : "021 Library relationships",
+                        "child2" : "022 Administration of physical plant",
+                        "child3" : "023 Personnel management",
+                        "child4" : "025 Library operations"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "030 Encyclopaedias & books of facts",
+                    "children" : [{
+                        "child1" : "031 Encyclopaedias in American English",
+                        "child2" : "032 Encyclopaedias in English",
+                        "child3" : "033 Encyclopaedias in other Germanic languages",
+                        "child4" : "034 Encyclopaedias in French, Occitan, and Catalan"
+                    }]
+                }]
+            }]
+        }],
+        "subtree2" : [{
+            "name" : "100 – Philosophy & psychology",
+            "children" : [{
+                "child1" : [{
+                    "name" : "100 Philosophy",
+                    "children" : [{
+                        "child1" : "101 Theory of philosophy",
+                        "child2" : "102 Miscellany",
+                        "child3" : "103 Dictionaries & encyclopaedias",
+                        "child4" : "105 Serial publications"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "110 Metaphysics",
+                    "children" : [{
+                        "child1" : "011 Bibliographies",
+                        "child2" : "012 Bibliographies of individuals",
+                        "child3" : "014 Bibliographies of anonymous & pseudonymous works",
+                        "child4" : "015 Bibliographies of works from specific places"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "120 Epistemology",
+                    "children" : [{
+                        "child1" : "021 Library relationships",
+                        "child2" : "022 Administration of physical plant",
+                        "child3" : "023 Personnel management",
+                        "child4" : "025 Library operations"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "130 Parapsychology & occultism",
+                    "children" : [{
+                        "child1" : "031 Encyclopaedias in American English",
+                        "child2" : "032 Encyclopaedias in English",
+                        "child3" : "033 Encyclopaedias in other Germanic languages",
+                        "child4" : "034 Encyclopaedias in French, Occitan, and Catalan"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree3" : [{
+            "name" : "200 – Religon",
+            "children" : [{
+                "child1" : [{
+                    "name" : "200 Religion",
+                    "children" : [{
+                        "child1" : "201 Religious mythology, general classes of religion, interreligious relations and attitudes, social theology",
+                        "child2" : "202 Doctrines",
+                        "child3" : "203 Public worship and other practices",
+                        "child4" : "204 Religious experience, life, practice"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "210 Philosophy & theory of religion",
+                    "children" : [{
+                        "child1" : "211 Concepts of God",
+                        "child2" : "212 Existence, ways of knowing God, attributes of God",
+                        "child3" : "213 Creation",
+                        "child4" : "214 Theodicy"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "220 The Bible",
+                    "children" : [{
+                        "child1" : "221 Old Testament (Tanakh)",
+                        "child2" : "222 Historical books of Old Testament",
+                        "child3" : "223 Poetic books of Old Testament",
+                        "child4" : "224 Prophetic books of Old Testament"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "230 Christianity",
+                    "children" : [{
+                        "child1" : "231 God",
+                        "child2" : "232 Jesus Christ & his family",
+                        "child3" : "233 Humankind",
+                        "child4" : "234 Salvation & grace"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree4" : [{
+            "name" : "300 – Social sciences",
+            "children" : [{
+                "child1" : [{
+                    "name" : "300 Social sciences, sociology & anthropology",
+                    "children" : [{
+                        "child1" : "301 Sociology & anthropology",
+                        "child2" : "302 Social interaction",
+                        "child3" : "303 Social processes",
+                        "child4" : "304 Factors affecting social behaviour"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "310 Statistics",
+                    "children" : [{
+                        "child1" : "314 General statistics of Europe",
+                        "child2" : "315 General statistics of Asia",
+                        "child3" : "316 General statistics of Africa",
+                        "child4" : "317 General statistics of North America"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "320 Political science",
+                    "children" : [{
+                        "child1" : "321 Systems of governments & states",
+                        "child2" : "322 Relation of state to organized groups & their members",
+                        "child3" : "323 Civil & political rights",
+                        "child4" : "324 The political process"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "330 Economics",
+                    "children" : [{
+                        "child1" : "331 Labour economics",
+                        "child2" : "332 Financial economics",
+                        "child3" : "333 Economics of land & energy",
+                        "child4" : "334 Cooperatives"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree5" : [{
+            "name" : "400 – Language",
+            "children" : [{
+                "child1" : [{
+                    "name" : "400 Language",
+                    "children" : [{
+                        "child1" : "401 Philosophy & theory; international languages",
+                        "child2" : "402 Miscellany",
+                        "child3" : "403 Dictionaries, encyclopaedias, concordances",
+                        "child4" : "404 Special topics of language"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "410 Linguistics",
+                    "children" : [{
+                        "child1" : "411 Writing systems of standard forms of languages",
+                        "child2" : "412 Etymology of standard forms of languages",
+                        "child3" : "413 Dictionaries of standard forms of languages",
+                        "child4" : "414 Phonology & phonetics of standard forms of languages"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "420 English & Old English languages",
+                    "children" : [{
+                        "child1" : "421 Writing system, phonology, phonetics of standard English",
+                        "child2" : "422 Etymology of standard English",
+                        "child3" : "423 Dictionaries of standard English",
+                        "child4" : "425 Grammar of standard English"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "430 German & related languages",
+                    "children" : [{
+                        "child1" : "431 Writing systems, phonology, phonetics of standard German",
+                        "child2" : "432 Etymology of standard German",
+                        "child3" : "433 Dictionaries of standard German",
+                        "child4" : "435 Grammar of standard German"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree6" : [{
+            "name" : "500 – Science",
+            "children" : [{
+                "child1" : [{
+                    "name" : "500 Natural sciences & mathematics",
+                    "children" : [{
+                        "child1" : "501 Philosophy & theory",
+                        "child2" : "502 Miscellany",
+                        "child3" : "503 Dictionaries, encyclopaedias, concordances",
+                        "child4" : "505 Serial publications"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "510 Mathematics",
+                    "children" : [{
+                        "child1" : "511 General principles of mathematics",
+                        "child2" : "512 Algebra",
+                        "child3" : "513 Arithmetic",
+                        "child4" : "514 Topology"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "520 Astronomy",
+                    "children" : [{
+                        "child1" : "521 Celestial mechanics",
+                        "child2" : "522 Techniques, procedures, apparatus, equipment, materials",
+                        "child3" : "523 Specific celestial bodies & phenomena",
+                        "child4" : "525 Earth (Astronomical geography)"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "530 Physics",
+                    "children" : [{
+                        "child1" : "531 Classical mechanics",
+                        "child2" : "532 Fluid mechanics",
+                        "child3" : "533 Pneumatics (Gas mechanics)",
+                        "child4" : "534 Sound & related vibrations"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree7" : [{
+            "name" : "600 – Technology",
+            "children" : [{
+                "child1" : [{
+                    "name" : "600 Technology",
+                    "children" : [{
+                        "child1" : "601 Philosophy & theory",
+                        "child2" : "602 Miscellany",
+                        "child3" : "603 Dictionaries, encyclopaedias, concordances",
+                        "child4" : "604 Technical drawing, hazardous materials technology; groups of people"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "610 Medicine & health",
+                    "children" : [{
+                        "child1" : "611 Human anatomy, cytology, histology",
+                        "child2" : "612 Human physiology",
+                        "child3" : "613 Personal health & safety",
+                        "child4" : "614 Forensic medicine; incidence of injuries, wounds, disease; public preventive medicine"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "620 Engineering",
+                    "children" : [{
+                        "child1" : "621 Applied physics",
+                        "child2" : "622 Mining & related operations",
+                        "child3" : "623 Military & nautical engineering",
+                        "child4" : "624 Civil engineering"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "630 Agriculture",
+                    "children" : [{
+                        "child1" : "631 Specific techniques; apparatus, equipment, materials",
+                        "child2" : "632 Plant injuries, diseases, pests",
+                        "child3" : "633 Field & plantation crops",
+                        "child4" : "634 Orchards, fruits, forestry"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree8" : [{
+            "name" : "700 – Arts & Recreation",
+            "children" : [{
+                "child1" : [{
+                    "name" : "700 Arts",
+                    "children" : [{
+                        "child1" : "701 Philosophy & theory of fine & decorative arts",
+                        "child2" : "702 Miscellany of fine & decorative arts",
+                        "child3" : "703 Dictionaries, encyclopaedias, concordances of fine & decorative arts",
+                        "child4" : "704 Special topics in fine & decorative arts"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "710 Area planning & landscape architecture",
+                    "children" : [{
+                        "child1" : "711 Area planning (Civic art)",
+                        "child2" : "712 Landscape architecture (Landscape design)",
+                        "child3" : "713 Landscape architecture of trafficways",
+                        "child4" : "714 Water features in landscape architecture"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "720 Architecture",
+                    "children" : [{
+                        "child1" : "721 Architectural materials & structural elements",
+                        "child2" : "722 Architecture from earliest times to ca. 300",
+                        "child3" : "723 Architecture from ca. 300 to 1399",
+                        "child4" : "724 Architecture from 1400"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "730 Sculpture, ceramics, & metalwork",
+                    "children" : [{
+                        "child1" : "731 Processes, forms, subjects of sculpture",
+                        "child2" : "732 Sculpture from earliest times to ca. 500, sculpture of non-literate peoples",
+                        "child3" : "733 Greek, Etruscan, Roman sculpture",
+                        "child4" : "734 Sculpture from ca. 500 to 1399"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree9" : [{
+            "name" : "800 – Literature",
+            "children" : [{
+                "child1" : [{
+                    "name" : "800 Literature, rhetoric & criticism",
+                    "children" : [{
+                        "child1" : "801 Philosophy & theory",
+                        "child2" : "802 Miscellany",
+                        "child3" : "803 Dictionaries, encyclopaedias, concordances",
+                        "child4" : "805 Serial publications"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "810 American literature in English",
+                    "children" : [{
+                        "child1" : "811 American poetry in English",
+                        "child2" : "812 American drama in English",
+                        "child3" : "813 American fiction in English",
+                        "child4" : "814 American essays in English"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "820 English & Old English literatures",
+                    "children" : [{
+                        "child1" : "821 English Poetry",
+                        "child2" : "822 English drama",
+                        "child3" : "823 English fiction",
+                        "child4" : "824 English essays"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "830 German & related literatures",
+                    "children" : [{
+                        "child1" : "831 German poetry",
+                        "child2" : "832 German drama",
+                        "child3" : "833 German fiction",
+                        "child4" : "834 German essays"
+                    }]
+                }]
+            }]          
+        }],
+        "subtree10" : [{
+            "name" : "900 – History & geography",
+            "children" : [{
+                "child1" : [{
+                    "name" : "900 History",
+                    "children" : [{
+                        "child1" : "901 Philosophy & theory of history",
+                        "child2" : "902 Miscellany of history",
+                        "child3" : "903 Dictionaries, encyclopaedias, concordances of history",
+                        "child4" : "904 Collected accounts of events"
+                    }]
+                }],
+                "child2" : [{
+                    "name" : "910 Geography & travel",
+                    "children" : [{
+                        "child1" : "911 Historical geography",
+                        "child2" : "912 Graphic representations of surface of earth and of extra-terrestrial worlds",
+                        "child3" : "913 Geography of & travel in ancient world",
+                        "child4" : "914 Geography of & travel in Europe"
+                    }]
+                }],
+                "child3" : [{
+                    "name" : "940 History of Europe",
+                    "children" : [{
+                        "child1" : "941 British Isles",
+                        "child2" : "942 England & Wales",
+                        "child3" : "943 Germany & neighbouring central European countries",
+                        "child4" : "944 France & Monaco"
+                    }]
+                }],
+                "child4" : [{
+                    "name" : "950 History of Asia",
+                    "children" : [{
+                        "child1" : "951 China & adjacent areas",
+                        "child2" : "952 Japan",
+                        "child3" : "953 Arabian Peninsula & adjacent areas",
+                        "child4" : "954 India & neighbouring south Asian countries"
+                    }]
+                }]
+            }]          
+        }]
+    }]
+}

@@ -1,0 +1,160 @@
+﻿@model LibraryDeweyApp.Global.CallNumbers
+@{
+    ViewBag.Title = "Replacing Books Result";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData["SaveResult"] != null)
+{
+    <div class="alert-success">
+        <strong>@TempData["SaveResult"].ToString()</strong>
+    </div>
+}
+
+@if (Model != null && Model.RandomCallNumberList != null)
+{
+    <div class="col-md-4">
+        <h3>Your score: @Model.Result/@ViewBag.TotalMarks</h3>
+        <p> @ViewBag.Percent%</p>
+    </div>
+    <div class="col-md-4">
+        <h3>
+            Time: @Model.TimeCompleted
+        </h3>
+        <p>Date: @DateTime.Now</p>
+    </div>
+
+
+
+    using (Html.BeginForm("Save", "ReplacingBooksResult", FormMethod.Post))
+    {
+        //Html.AntiForgeryToken();
+        <div class="col-md-4">
+            <h3>
+                <a class="btn btn-primary" href="~/ReplacingBooks/">Try Again »</a>
+
+                @Html.HiddenFor(a => a.TimeCompleted)
+                @Html.HiddenFor(a => a.Result)
+
+                @*<input type="hidden" value="@ViewBag.Result" name="userResult" />*@
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Model.SavedResult != true)
+                    {
+                        <input type="submit" class="btn btn-success" value="Save" />
+                    }
+                    else
+                    {
+                        @Html.ActionLink("View Leaderboard", "Results", "Leaderboards", new { id = 1}, new { @class = "btn btn-success" })
+                    }
+                }
+                else
+                {
+                    @Html.ActionLink("Log in to Save Next Result", "Login", "Account", new { ReturnUrl = "~/ReplacingBooks/" }, new { @class = "btn btn-success" })
+                }
+            </h3>
+        </div>
+
+
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Random List
+                </th>
+                <th>
+                    Correct Order
+                </th>
+                <th>
+                    Your Answers (@Model.Result/@ViewBag.TotalMarks)
+                    @for (int l = 0; l < Model.MatchedCallNumbersList.Count; l++)
+                    {
+                        @Html.HiddenFor(m => m.MatchedCallNumbersList[l].ID);
+                        @Html.HiddenFor(m => m.MatchedCallNumbersList[l].MatchedCallNumber);
+                    }
+
+                </th>
+            </tr>
+            @for (int i = 0; i < Model.RandomCallNumberList.Count; i++)
+            {
+                for (int j = i; j < Model.SortedCallNumberList.Count;)
+                {
+                    for (int k = i; k < Model.UserCallNumberList.Count;)
+                    {
+                        var sort = @Model.SortedCallNumberList[i].SortedCallNumber;
+                        var user = @Model.UserCallNumberList[i].UserCallNumber;
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(x => x.RandomCallNumberList[i].ID)
+                                @Html.HiddenFor(x => x.RandomCallNumberList[i].RandCallNumber)
+                                <p>@Model.RandomCallNumberList[i].RandCallNumber</p>
+                            </td>
+                            <td style="background-color:#9fff9f;">
+                                @Html.HiddenFor(x => x.SortedCallNumberList[i].ID)
+                                @Html.HiddenFor(x => x.SortedCallNumberList[i].SortedCallNumber)
+                                <p>@sort</p>
+                            </td>
+                            @Html.HiddenFor(x => x.UserCallNumberList[i].ID)
+                            @Html.HiddenFor(x => x.UserCallNumberList[i].UserCallNumber)
+                            @if (user == sort)
+                            {
+                                <td style="background-color:#9fff9f;">
+                                    <p>@user</p>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color: #ff9f9f;">
+                                    @if (!String.IsNullOrEmpty(user))
+                                    {
+                                        <p>@user</p>
+                                    }
+                                    else
+                                    {
+                                        <p>No Answer</p>
+                                    }
+
+                                </td>
+                            }
+                        </tr>
+                        break;
+                    }
+                    break;
+                }
+
+            }
+        </table>
+    }
+
+
+    if (!string.IsNullOrEmpty(ViewBag.SaveResult))
+    {
+        <p>@ViewBag.SaveResult</p>
+    }
+}
+else
+{
+    <div class="col-md-12">
+        @if (!string.IsNullOrEmpty(ViewBag.AuthError))
+        {
+            <h4>You need to login to Save Results</h4>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.SaveResult))
+        {
+            <p>@ViewBag.SaveResult</p>
+        }
+        <p>You have no results, please try again</p>
+        <div class="row">
+            @using (Html.BeginForm("Index", "ReplacingBooks", FormMethod.Post))
+            {
+                @*@Html.AntiForgeryToken()*@
+                <input type="hidden" value="start" name="x" />
+                <input type="submit" value="Take Test »" class="btn btn-success" />
+            }
+            @*@Html.ActionLink("Take Test »", "Index", "ReplacingBooks", null, new { @class = "btn btn-success" })*@
+            @Html.ActionLink("View Leadorboards", "Results", "Leaderboards", new { id = 1 }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+

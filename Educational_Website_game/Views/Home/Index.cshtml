@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "LearnDewey";
+}
+
+<style>
+    .jumbotron{
+        background-color:unset;
+    }
+    h1 {
+        text-align: center;
+        color: #1A324D !important;
+        font-size: 4rem !important;
+        padding: unset !important;
+        margin: unset !important;
+    }
+
+    h2 {
+        text-align: center;
+        color: #535353;
+        padding: unset;
+        margin: unset;
+        margin-bottom: 10px;
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 2.4rem;
+    }
+    h4 {
+        color: #7D7D7D;
+    }
+
+    .row, .hero {
+        margin-bottom: 5rem;
+    }
+
+    .card-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+        box-shadow: 0px 4px 9px 1px rgba(0,0,0,.2);
+        padding: 3rem 3rem;
+        border-radius: 15px;
+        background-color: #E9E9E9;
+    }
+
+    .card {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-row-gap: 1rem;
+    }
+
+    .card .title h4{
+        font-size: 2.1rem;
+        color: #1A324D;
+        text-align: center;
+    }
+
+        .card .icon {
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 9px 1px rgba(0,0,0,.09);
+            width: fit-content;
+            margin: 0 auto 2rem auto;
+            display: block;
+            background-color:white;
+        }
+
+    .card .icon p {
+        color: #979797;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .card .icon img {
+        width: 100%;
+        max-width: 14rem;
+        max-height: 9rem;
+        margin: auto;
+        display: block;
+    }
+
+    .card .icon .wider_img{
+        max-width: 21rem;
+    }
+
+    .card .cta {
+        margin: auto;
+    }
+
+    .card .cta a {
+        background-color: #3E9847;
+        padding: 5px 3rem;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        border: none;
+        display: block;
+    }
+
+    .leaderboards a {
+        background-color: #569FFF;
+        padding: 1rem 3rem;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        display: block;
+        max-width: 20rem;
+        text-align: center;
+    }
+
+    .leaderboards h3{
+        margin:unset;
+    }
+
+    .leaderboards h4 {
+        margin: unset;
+        font-size: 2rem;
+    }
+
+    .section-heading{
+        margin-bottom:1rem;
+    }
+
+
+</style>
+
+<div class="jumbotron">
+    <div class="hero">
+        <h1>Learn the Dewey Decimal System!</h1>
+        <h2>Our goal is to make learning <span style="color:#3E9847;text-decoration:underline">fun</span> and not <span style="color:#FF0000;"><i>boring.</i></span></h2>
+    </div>
+    <div class="row">
+        <h3>Choose one of our amazing games!</h3>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="title">
+                    <h4>1. Reordering</h4>
+                </div>
+
+                <div class="icon">
+                    <div class="content">
+                        <p>Replacing Books</p>
+                        <img src="~/Images/Reordering_icon.svg" alt="reodering"/>
+                    </div>
+                </div>
+
+                <div class="cta">
+                    @Html.ActionLink("PLAY", "Index", "ReplacingBooks")
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">
+                    <h4>2. Matching Columns</h4>
+                </div>
+                <div class="icon">
+                    <div class="content">
+                        <p>Identifying Areas</p>
+                        <img src="~/Images/matching_icon.svg" alt="matching" class="wider_img"/>
+                    </div>
+                </div>
+
+                <div class="cta">
+                    @Html.ActionLink("PLAY", "Index", "IdentifyAreas")
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">
+                    <h4>3. Multiple Choice Quiz</h4>
+                </div>
+                <div class="icon">
+                    <div class="content">
+                        <p>Finding Call Numbers</p>
+                            <img src="~/Images/quiz_icon.svg" alt="quiz" />              
+                    </div>
+                </div>
+
+                <div class="cta">
+                    @Html.ActionLink("PLAY", "HowTo", "FindingCallNumbers")
+                </div>
+            </div>
+        </div>            
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="leaderboards">
+                <div class="section-heading">
+                    <h3>Look who is the top at the Leaderboards!</h3>
+                    <h4>Can you beat their scores?</h4>
+                </div>
+     
+                @Html.ActionLink("TAKE ME THERE", "Index", "Leaderboards", null, new { @class = "cta" })
+            </div>   
+        </div>
+    </div>
+</div>

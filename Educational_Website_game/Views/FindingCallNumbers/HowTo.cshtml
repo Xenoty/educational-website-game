@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "HowTo";
+}
+
+<style>
+    .jumbotron p {
+        font-size: 17px;
+    }
+</style>
+
+<h2 style="text-align:center">Finding Call Numbers</h2>
+<br />
+<div class="row" style="clear:both;">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <b>1.</b> The <a href="https://guides.library.appstate.edu/dewey" target="_blank">Dewey Decimal System</a> is used worldwide in libraries.
+                    This game will test you in <b>finding</b> the correct <b>Call Number Level</b> based on a <b>Third Level Description.</b> Click here for a list of <a href="https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes" target="_blank">Dewey Decimal Classes</a>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p><b>2.</b>You need to find the correct Levels which the <b>Third Level Description</b> falls under, from <b>Top Level</b> to <b>Third Level.</b></p>
+            </div>
+
+            <div class="col-md-12">
+                <p><b>3.</b> Simply "click" the possible answer in the options to select it and click "Submit" to continue.</p>
+                <p>Example: Third Level description = "<b>Library operations</b>"</p>
+                <ul>
+                    <li><b>Top Level</b> = 000 Computer science, information & general works</li>
+                    <li><b>Second Level</b> = 020 Library & information sciences</li>
+                    <li><b>Third Level</b> = 025 Library operations</li>
+                </ul>
+            </div>
+
+
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="col-md-12">
+                    <p><b>4.</b> You need an Account to Save your Results @Html.ActionLink("Register", "Register", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null) or @Html.ActionLink("Log in", "Login", "Account", new { ReturnUrl = HttpContext.Current.Request.RawUrl }, null)</p>
+
+                </div>
+            }
+            <div class="col-md-12" style="text-align:center">
+                @Html.ActionLink("Start Now!", "Index", "FindingCallNumbers", null, new { @class = "btn btn-primary", @style = "font-size:18px;" })
+            </div>
+        </div>
+
+    </div>
+</div>
