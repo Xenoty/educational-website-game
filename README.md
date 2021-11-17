@@ -1,13 +1,6 @@
 README
 
-# Subject - PROG7312 POE
-
-## Author & Developer
-Name:  Jacques Olivier
-
-Student Number: 18008247
-
-Year: BCAD3 2020
+# Educational Website Game
 
 1. [Website Overview](#website-overview)
     1. [Tech Stack](#tech-stack)
@@ -23,6 +16,9 @@ Year: BCAD3 2020
 7. [Software Specs](#software-specs)
 
 ## Website Overview
+
+Year: 2020 (Final Year of Studies)
+
 LearnDewey is an online learning/training platform educating users about the Dewey Decimal System through various online actives. These activities include: Replacing Books, Identifying Areas & Finding Call Numbers.
   
 The core purpose for this system is to make learning fun and engaging.
