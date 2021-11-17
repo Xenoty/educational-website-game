@@ -1,6 +1,7 @@
 README
 
 # Subject - PROG7312 POE
+
 ## Author & Developer
 Name:  Jacques Olivier
 
@@ -8,7 +9,20 @@ Student Number: 18008247
 
 Year: BCAD3 2020
 
-## LearnDewey Overview
+1. [Website Overview](#website-overview)
+    1. [Tech Stack](#tech-stack)
+3. [Getting Started](#getting-started)
+    1. [Requirements](#requirements)
+    2. [Steps](#steps)
+    3. [Issues & Solutions](#issues-and-solutions)
+4. [Research](#research)
+    1. [Gamification](#gamification)
+    2. [Dewey Decimal Classes](#dewey-decimal-classes)
+5. [Games](#games)
+6. [Issues encountered](#issues-encountered)
+7. [Software Specs](#software-specs)
+
+## Website Overview
 LearnDewey is an online learning/training platform educating users about the Dewey Decimal System through various online actives. These activities include: Replacing Books, Identifying Areas & Finding Call Numbers.
   
 The core purpose for this system is to make learning fun and engaging.
@@ -23,34 +37,41 @@ The design is simplistic with a very basic layout due to the focus centering on 
 
 Each activity will have basic description of what it is and how to play it. It also includes links to resources which users can use to find out more about the Dewey Decimal System.
 
-## How to run Project
+### Tech Stack
+
+The following tech stack was utilized:
+1. dotnet framework (*back-end & front-end*)
+2. SQL Server (*local database*)
+3. Azure (*hosting*)
+
+## Getting Started
 ### Requirements
--	Visual Studio 2019 Community Edition (v.16.7.2)
--	Asp.Net 4.7
+-	Visual Studio 2019
+-	Asp.Net 4.7 (or higher)
 -	Sql Server (any year)
 -	IIS Express
 -	Internet Browser (preferably Google Chrome)
 
 ### Steps:
-1.	Open the solution in Visual Studio 2019
-2.	Clean and Rebuild the Solution 
-3.	Github was used for production, make sure you are on “master” branch
-4.	To run, click “ISS Express" (google chrome)
+1.  [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository)  or [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) the repo.
+2.	In the folder, double-click the .sln file to open the solution.
+3.	Clean and Rebuild the entire Solution.
+5.	To run, click “ISS Express" (google chrome)
 
-### Issues:
-1. Missing Project
+### Issues and Solutions
+1. Project files are missing under the solution.
     *	If project is missing from the solution,
     *	Right-click and select “Load”
     *	Browse to the project and select it
 
-2. Asp.Net version
+2. Asp.Net version is not supported.
     *	If you don’t have Asp.Net 4.7,
     *	Right-click LibraryDeweyApp
     *	Select properties
     *	Under Target Framework, change it to the desired framework
     *	Clean and rebuild project
 
-3. Running live Azure Database
+3. Live Azure Database is running instead of local database through SQL Server
 
     if the application is running slowly, it may be due to the connection string connecting to the live database
     To fix this, 
@@ -77,7 +98,7 @@ We are required to use the advanced data structure of a tree for our Finding Cal
 * #### **Objective**: Help user to Identify which Levels a Third Level Description falls under.
 * #### **Function**: User is required to select the correct option from a multiple choice quiz indicating which level the description can be found. 
 
-## Issues & Solutions:
+## Issues encountered
 During the creation of this app, I ran into various issues along the way.
 
 1. Two Different dB Contexts
