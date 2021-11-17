@@ -8,10 +8,8 @@ Student Number: 18008247
 
 Year: BCAD3 2020
 
-Website Link: https://learndeweyweb.azurewebsites.net/ 
-
 ## LearnDewey Overview
- LearnDewey is an online learning/training platform educating users about the Dewey Decimal System through various online actives. These activities include: Replacing Books, Identifying Areas & Finding Call Numbers.
+LearnDewey is an online learning/training platform educating users about the Dewey Decimal System through various online actives. These activities include: Replacing Books, Identifying Areas & Finding Call Numbers.
   
 The core purpose for this system is to make learning fun and engaging.
 A leaderboard system has been integrated to aid in this purpose, also known as a gamification feature. According to my Research, Leaderboards has yielded the highest implementation across all learning platforms implying its high success rate and participation.
