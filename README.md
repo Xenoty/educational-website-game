@@ -3,7 +3,8 @@ README
 # Educational Website Game
 
 1. [Website Overview](#website-overview)
-    1. [Tech Stack](#tech-stack)
+    1. [Key Notes](#key-notes)
+    2. [Tech Stack](#tech-stack)
 3. [Getting Started](#getting-started)
     1. [Requirements](#requirements)
     2. [Steps](#steps)
@@ -33,18 +34,22 @@ The design is simplistic with a very basic layout due to the focus centering on 
 
 Each activity will have basic description of what it is and how to play it. It also includes links to resources which users can use to find out more about the Dewey Decimal System.
 
-### Tech Stack
+### Key Notes
+* Data is stored in .mdf files under the App_Data folder. The connection string points to this attached file.
+* You can play games anonymously, but to save results you need to create an account and login.
+* There may be bugs and don't plan on making any updates. (unless there is a need for it).
 
+### Tech Stack
 The following tech stack was utilized:
 1. dotnet framework (*back-end & front-end*)
 2. SQL Server (*local database*)
 3. Azure (*hosting*)
 
 ## Getting Started
+
 ### Requirements
 -	[Visual Studio](https://visualstudio.microsoft.com/vs/community/)
 -	[Asp.Net](https://dotnet.microsoft.com/apps/aspnet)
--	Sql Server (not sure if this is requried?)
 -	[IIS Express](https://www.microsoft.com/en-us/download/details.aspx?id=48264)
 -	[Internet Browser](https://www.google.com/chrome/) (Google Chrome)
 
