@@ -42,11 +42,11 @@ The following tech stack was utilized:
 
 ## Getting Started
 ### Requirements
--	Visual Studio 2019
--	Asp.Net 4.7 (or higher)
--	Sql Server (any year)
--	IIS Express
--	Internet Browser (preferably Google Chrome)
+-	[Visual Studio](https://visualstudio.microsoft.com/vs/community/)
+-	[Asp.Net](https://dotnet.microsoft.com/apps/aspnet)
+-	Sql Server (not sure if this is requried?)
+-	[IIS Express](https://www.microsoft.com/en-us/download/details.aspx?id=48264)
+-	[Internet Browser](https://www.google.com/chrome/) (Google Chrome)
 
 ### Steps:
 1.  [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository)  or [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) the repo.
@@ -55,28 +55,38 @@ The following tech stack was utilized:
 5.	To run, click “ISS Express" (google chrome)
 
 ### Issues and Solutions
-1. Project files are missing under the solution.
-    *	If project is missing from the solution,
-    *	Right-click and select “Load”
-    *	Browse to the project and select it
 
-2. Asp.Net version is not supported.
-    *	If you don’t have Asp.Net 4.7,
-    *	Right-click LibraryDeweyApp
-    *	Select properties
-    *	Under Target Framework, change it to the desired framework
-    *	Clean and rebuild project
+**1. Could not find path for 'roslyn\csc.exe'**
 
-3. Live Azure Database is running instead of local database through SQL Server
+![image](https://user-images.githubusercontent.com/60667206/142729416-273fede8-357d-457e-a01b-63a7fc5b7a2b.png)
+*   In the Solution Explorer, right-click on Solution 'Educational_Website_game'.
+*   Select 'Clean Solution'.
+*   Perform step 1 again, and select 'Rebuild Solution'.
+*   Click the green arrow to run the project.
 
-    if the application is running slowly, it may be due to the connection string connecting to the live database
-    To fix this, 
+**2. Project file has been unloaded.**
 
-    *	just comment out the 2nd "DefaultConnection"
-    *	Uncomment the first connection string "DefaultConnection"
+![image](https://user-images.githubusercontent.com/60667206/142729574-c49dc20a-c061-416c-988b-6d6dc013ea83.png) 
 
+*	In the Solution Explorer, right-click the missing project and select 'Reload Project'.
+    
+**3. Project file has been removed.**
+
+![image](https://user-images.githubusercontent.com/60667206/142729630-9c5ce377-5b1d-4a5d-a56e-6638f0d4ae47.png)
+
+*   Right-click the Solution and select 'Add' -> 'Existing Project'.
+*   Navitgate to the cloned project to the following directory '[yourpath]\educational-website-game\Educational_Website_game'.
+*   Find the LibraryDeweyApp.csproj file, and click 'Open'.
+*   Click the green arrow to run the project.
+
+**4. Asp.Net version is not supported.**
+*	Right-click 'LibraryDeweyApp' project in the Solution Explorer and select 'Properties'.
+*	In the left menu, make sure 'Applicaiton' is selected
+*	Under Target Framework, change it to the desired framework.
+*	Clean and rebuild the project in the Solution Explorer.
 
 ## Research
+
 ### Gamification
 The Research documentation indicates the exploration of gamification features. In my research, it explains which feature I have chosen and my motivation for doing so.
 
@@ -84,6 +94,7 @@ The Research documentation indicates the exploration of gamification features. I
 We are required to use the advanced data structure of a tree for our Finding Call Numbers activity. From my research, I have identified all the Dewey Decimal Classifcation Data with reasons to how I have set it up.
 
 ## Games
+
 ### 1. Replacing Books
 * #### **Objective**: Help user to understand the hiearchy of Call Numbers.
 * #### **Function**: User is required to reorganize the Call Numbers from **Lowest** to **Highest**. 
@@ -95,6 +106,7 @@ We are required to use the advanced data structure of a tree for our Finding Cal
 * #### **Function**: User is required to select the correct option from a multiple choice quiz indicating which level the description can be found. 
 
 ## Issues encountered
+
 During the creation of this app, I ran into various issues along the way.
 
 1. Two Different dB Contexts
@@ -122,6 +134,8 @@ During the creation of this app, I ran into various issues along the way.
     * Converted the JSON file to a Nest Dictionary. From this, I was able to iterate through each item and nested item to add to the Non-binary tree accordingly. 
 
 ## Software specs
+    
+These are are the software specifications when the project was created.
 * Product Version - Microsoft Visual Studio Community 2019
 * VS Version - 16.7.2
 * .NET Framework- 4.8.03752
