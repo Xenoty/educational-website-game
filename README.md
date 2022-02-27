@@ -2,6 +2,8 @@ README
 
 # Educational Website Game
 
+![Education Website Game - landing page](https://user-images.githubusercontent.com/60667206/155888796-427f8c93-22bb-48b4-8e9f-6bb4e5786cea.png)
+
 1. [Website Overview](#website-overview)
     1. [Key Notes](#key-notes)
     2. [Tech Stack](#tech-stack)
